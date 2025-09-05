@@ -39,7 +39,7 @@ rl.question("please enter a number for factorial" , numStr =>{
 
 
          } else if (choice === "3"){
-            onsole.log("existing application");
+            console.log("existing application");
          } else {
             Console.log("Invalid Choice. Please Try Again");
          }
