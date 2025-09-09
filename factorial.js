@@ -35,3 +35,7 @@ rl.question("Enter your choice (1-3): " , choice =>{
     console.log("Hello");
 } 
 
+function computeFactorial(){
+    console.log("Factorial");
+    
+}
