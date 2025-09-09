@@ -7,7 +7,7 @@ const rl = ealine.createInterface({
  output: process.stdin
 })
 
-
+function mainMenu(){
 console.log ("-------------------------- ");
 console.log ("Factorial Application");
 console.log ("1. say hello");
@@ -45,3 +45,4 @@ rl.question("please enter a number for factorial" , numStr =>{
          }
 
         })
+}
