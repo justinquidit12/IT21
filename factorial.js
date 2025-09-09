@@ -37,7 +37,7 @@ rl.question("Enter your choice (1-3): " , choice =>{
 
 function computeFactorial(){
     console.log("Factorial");
-    
+
     rl.question("Please enter a number for factorial: ", numStr =>{
             let num = parseInt(numStr);
 
@@ -54,4 +54,10 @@ function computeFactorial(){
             }
             backToMenu();
         })
+}
+
+function exitProgram(){
+    console.log("Exiting Application");
+    rl.close();
+    console.clear();
 }
