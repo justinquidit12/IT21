@@ -16,33 +16,20 @@ console.log ("exit application");
 console.log ("_--------------------------");
 
 rl.question("Enter your choice (1-3): " , choice =>{
-    console.log(choice);
+    
 
     if (choice === "1"){
-         console.log("Hello");
+        sayHello();
          } else if (choice === "2"){
-            console.log("Factorial");
-rl.question("please enter a number for factorial" , numStr =>{
-    let num = parseInt(numStr);
+            computerFactorial();
+            } else if (choice === "3"){
+              exitProgram();
+                } else {
+            console.log("Invalid Choice. Please Try Again");
+        }
 
-    if (isNaN(num) || num < 0){
-        console.log("please enter a non-negative integer");
-    } else {
-        let fact = 1;
-
-        for (let i=1; i <= num; i++){
-            fact*=i;
-    }
-    console.log("The Factorial of" + num + " is " + fact);
+    })
 }
-})
 
+   
 
-         } else if (choice === "3"){
-            console.log("existing application");
-         } else {
-            Console.log("Invalid Choice. Please Try Again");
-         }
-
-        })
-}
