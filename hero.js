@@ -24,9 +24,24 @@ class Hero{
         }
 }
 
-const hero1 = new Hero("Thorin", 100, 10);
+class Mage extends Hero {
+    constructor(name, health, mana) {
+        super(name, health);
+        this.mana = mana; 
+    }
+
+
+   useAbility(){
+    console.log(`${this.name} cast Fireball!`);
+}
+
+}
+
+const Thorin = new Hero("Thorin", 100, 10);
 const hero2 = new Hero("Gandalf", 120, 8);
 
 
-Thorin.showStats();
-Thorin.useAbility();
+//Thorin.showStats();
+//Thorin.useAbility();
+Gandalf.showStats();
+Gandalf.useAbility();
