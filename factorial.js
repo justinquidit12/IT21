@@ -1,85 +1,89 @@
-//console input
-const { Console } = require("console");
-const readline=require ("readline");
+// console input 
+const readline = require('readline');
 
-const rl = ealine.createInterface({
- input: process.stdin,
- output: process.stdin
-})
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-function mainMenu(){
-console.log ("-------------------------- ");
-console.log ("Factorial Application");
-console.log ("1. say hello");
-console.log ("2. factorial");
-console.log ("exit application");
-console.log ("_--------------------------");
+function mainMenu() {
+  console.clear();
+  console.log('--------------------------');
+  console.log('Factorial Application');
+  console.log('1. Say Hello');
+  console.log('2. Factorial');
+  console.log('3. Exit Application');
+  console.log('--------------------------');
 
-rl.question("Enter your choice (1-3): " , choice =>{
-    
-
-    if (choice === "1"){
-        sayHello();
-         } else if (choice === "2"){
-            computerFactorial();
-            } else if (choice === "3"){
-              exitProgram();
-                } else {
-            console.log("Invalid Choice. Please Try Again");
-        }
-
-    })
+  rl.question('Enter your choice (1-3): ', choice => {
+    const c = choice.trim();
+    if (c === '1') {
+      sayHello();
+    } else if (c === '2') {
+      computeFactorial();
+    } else if (c === '3') {
+      exitProgram();
+    } else {
+      console.log('Invalid Choice. Please Try Again');
+      // re-show menu
+      setTimeout(mainMenu, 0);
+    }
+  });
 }
 
-  function sayHello(){
-    console.log("Hello");
-} 
-
-function computeFactorial(){
-    console.log("Factorial");
-
-    rl.question("Please enter a number for factorial: ", numStr =>{
-            let num = parseInt(numStr);
-
-            if (isNaN(num) || num < 0){
-                console.log("Please enter a non-negative integer");
-            } else {
-                let fact = 1;
-
-                for (let i=1; i <= num; i++){
-                    fact *=i;
-                }
-
-                console.log("The factorial of " + num + " is " + fact);
-            }
-            backToMenu();
-        })
+function sayHello() {
+  console.log('\nHello\n');
+  backToMenu();
 }
 
-function exitProgram(){
-    console.log("Exiting Application");
-    rl.close();
-    console.clear();
+function computeFactorial() {
+  console.log('\n--- Factorial ---');
+
+  rl.question('Please enter a non-negative integer: ', numStr => {
+    const input = numStr.trim();
+
+    // accept only digits (no decimals, no negative sign)
+    if (!/^\d+$/.test(input)) {
+      console.log('Please enter a non-negative integer');
+      backToMenu();
+      return;
+    }
+
+    // use BigInt so large factorials are computed exactly
+    const n = BigInt(input);
+    let fact = 1n;
+    for (let i = 1n; i <= n; i++) {
+      fact *= i;
+    }
+
+    console.log(`The factorial of ${input} is ${fact.toString()}`);
+    backToMenu();
+  });
 }
 
-function backToMenu(){
-    console.log("--------------");
-    console.log("1. Back to menu");
-    console.log("2. Exit");
+function exitProgram() {
+  console.log('\nExiting Application');
+  rl.close();
+  process.exit(0);
+}
 
-    rl.question("What would you like to do next? (1-2) ", (backToMenuChoice)=>{
+function backToMenu() {
+  console.log('\n--------------');
+  console.log('1. Back to menu');
+  console.log('2. Exit');
 
-        if(backToMenuChoice==="1"){
-            console.clear();
-            mainMenu();
-        } else if (backToMenuChoice ==="2"){
-            exitProgram();
-        } else {
-            console.log("Invalid Choice. Please Try Again!");
-            backToMenu();
-        }
-
-    })
+  rl.question('What would you like to do next? (1-2) ', backToMenuChoice => {
+    const c = backToMenuChoice.trim();
+    if (c === '1') {
+      mainMenu();
+    } else if (c === '2') {
+      exitProgram();
+    } else {
+      console.log('Invalid Choice. Please Try Again!');
+      // re-prompt the backToMenu choices
+      setTimeout(backToMenu, 0);
+    }
+  });
 }
 
 mainMenu();
