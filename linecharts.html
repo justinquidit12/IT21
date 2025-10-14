@@ -7,5 +7,59 @@
 </head>
 <body>
     <h1>Line Charts</h1>
+
+    <div>
+    <canvas id="mychart"></canvas>
+</div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    class LineCharts{
+        constructor(canvasId, dataUrl){
+            this.canvasId = canvasId
+            this.dataUrl =  dataUrl
+            this.chart = null;
+
+        }
+//
+        renderChart(data){
+            //
+
+
+            const ctx = document.getElementById(this.canvasId).getContext("2d");
+
+            this.chart = new chart(ctx,{
+                type:"line",
+                dta:{
+                    labels: data.labels,
+                    datasets:[{
+                        labels: "Monthly Data"
+                        data: data.values,
+                        borderwidth:1
+                        
+                    }]
+                },
+                options: {
+                    scales: {
+                        y:{
+                            beginAtZero: true
+
+                        }
+                         }
+                }
+            });
+            //
+        }
+    }
+
+    async fetchData(){
+        try{
+            const response = await fetch(this.dataUrl);
+
+            if(!response.ok) throw new Error("failed to load data:$(response.statusText);)
+            const data = await response.json()
+        }
+    }
+
+</script>
 </html>
